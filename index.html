@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirection...</title>
+  <script>
+    const host = window.location.hostname;
+    const redirects = {
+      "etoualink.epc.cm": "https://sites.google.com/site/etoualink",
+      "mbankomo.epc.cm": "https://x.com/epcmbankomo",
+      "partenaire2.epc.cm": "https://wordpress.com/partenaire2"
+      // Ajoute les lignes ici pour nouveaux partenaires
+    };
+    const target = redirects[host] || "https://epc.cm"; // Défaut si inconnu
+    if (target) {
+      window.location.href = target + window.location.pathname; // Préserve le chemin
+    }
+  </script>
+</head>
+<body>
+  <p>Redirection en cours...</p>
+</body>
+</html>
