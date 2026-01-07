@@ -9,11 +9,13 @@
       "etoualink.epc.cm": "https://sites.google.com/site/etoualink",
       "mbankomo.epc.cm": "https://x.com/epcmbankomo",
       "partenaire2.epc.cm": "https://wordpress.com/partenaire2"
-      // Ajoute les lignes ici pour nouveaux partenaires, ex. : "nouveau.epc.cm": "https://url-cible.com"
+      // Ajoute ici : "nouveau.epc.cm": "https://url-du-site.com",
     };
-    const target = redirects[host] || "https://epc.cm"; // Défaut si inconnu
-    if (target) {
-      window.location.href = target + window.location.pathname; // Préserve le chemin
+    const targetBase = redirects[host];
+    if (targetBase) {
+      window.location.href = targetBase + window.location.pathname + window.location.search;
+    } else {
+      document.body.innerHTML = "<h1>Redirections EPC</h1><p>Ce site gère les redirections vers les partenaires. Si vous voyez cette page, le sous-domaine n'est pas configuré.</p>";
     }
   </script>
 </head>
