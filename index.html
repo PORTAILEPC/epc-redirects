@@ -1,25 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Redirection...</title>
+  <title>Redirection en cours...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Redirection en cours...</h1>
+  <p>Veuillez patienter pendant que nous vous redirigeons vers le site du partenaire.</p>
+
   <script>
-    const host = window.location.hostname;
+    // Liste des redirections : ajoute ou modifie ici pour chaque partenaire
     const redirects = {
       "etoualink.epc.cm": "https://sites.google.com/site/etoualink",
       "mbankomo.epc.cm": "https://x.com/epcmbankomo",
-      "partenaire2.epc.cm": "https://wordpress.com/partenaire2"
-      // Ajoute ici : "nouveau.epc.cm": "https://url-du-site.com",
+      "partenaire2.epc.cm": "https://wordpress.com/partenaire2",
+      "partenaire3.epc.cm": "https://autre-site.com"
+      // Ajoute une nouvelle ligne comme ceci pour chaque nouveau partenaire :
+      // "nouveau.epc.cm": "https://url-du-site.com",
     };
-    const targetBase = redirects[host];
-    if (targetBase) {
-      window.location.href = targetBase + window.location.pathname + window.location.search;
+
+    // Récupère le nom du domaine actuel (ex. : etoualink.epc.cm)
+    const host = window.location.hostname.toLowerCase();
+
+    // Cherche si ce domaine est dans la liste
+    const targetUrl = redirects[host];
+
+    if (targetUrl) {
+      // Redirection immédiate en conservant le chemin (ex. /page1)
+      window.location.href = targetUrl + window.location.pathname + window.location.search;
     } else {
-      document.body.innerHTML = "<h1>Redirections EPC</h1><p>Ce site gère les redirections vers les partenaires.</p>";
+      // Si le domaine n'est pas reconnu (ex. accès direct au site GitHub)
+      document.body.innerHTML = `
+        <h1>Gestionnaire de redirections EPC</h1>
+        <p>Ce site sert à rediriger les sous-domaines vers les sites des partenaires.</p>
+        <p>Le domaine <strong>${host}</strong> n'est pas configuré.</p>
+        <p>Contactez l'administrateur pour ajouter une nouvelle redirection.</p>
+      `;
     }
   </script>
-</head>
-<body>
-  <p>Redirection en cours...</p>
 </body>
 </html>
