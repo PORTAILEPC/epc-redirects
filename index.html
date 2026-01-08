@@ -1,57 +1,77 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>Redirection en cours...</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-      background-color: #f8f9fa;
-      color: #333;
-    }
-    h1 {
-      font-size: 24px;
-    }
-    p {
-      font-size: 18px;
-    }
-  </style>
+    <meta charset="utf-8">
+    <title>Système de Redirection EPC - Gestion de 100+ Sites</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        .admin { background: #f0f8ff; border-left: 5px solid #3498db; padding: 20px; margin: 30px auto; max-width: 800px; text-align: left; }
+        code { background: #eee; padding: 2px 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
 </head>
 <body>
-  <h1>Redirection en cours...</h1>
-  <p>Veuillez patienter pendant que nous vous redirigeons vers le site du partenaire.</p>
 
-  <script>
-    // Liste des redirections : ajoute ou modifie ici pour chaque partenaire
+<h1>✅ Système de Redirection Actif</h1>
+<p>Gestion centralisée pour les sites partenaires EPC.</p>
+
+<script>
+    // ================================
+    // BASE DE DONNÉES DES REDIRECTIONS
+    // MODIFIE UNIQUEMENT CET OBJET CI-DESSOUS
+    // ================================
     const redirects = {
-      "etoualink.epc.cm": "https://sites.google.com/site/etoualink",
-      "mbankomo.epc.cm": "https://x.com/epcmbankomo",
-      "partenaire2.epc.cm": "https://wordpress.com/partenaire2",
-      "partenaire3.epc.cm": "https://autre-site.com"
-      // Ajoute une nouvelle ligne comme ceci pour chaque nouveau partenaire :
-      // "nouveau.epc.cm": "https://url-du-site.com",
+        // Format : "sous-domaine.epc.cm": "https://url-cible.com",
+        "etoualink.epc.cm": "https://sites.google.com/site/etoualink",
+        "mbankomo.epc.cm": "https://x.com/epcmbankomo",
+        "demo1.epc.cm": "https://example.com",
+        "demo2.epc.cm": "https://google.com",
+        // 🚀 COPIE-COLLE LES LIGNES SUIVANTES POUR AJOUTER TON 100E PARTENAIRE :
+        // "nouveausite.epc.cm": "https://son-url.com",
+        // "autrepartenaire.epc.cm": "https://leur-site.org",
     };
 
-    // Récupère le nom du domaine actuel (ex. : etoualink.epc.cm)
+    // ================================
+    // LOGIQUE AUTOMATIQUE (NE PAS MODIFIER)
+    // ================================
     const host = window.location.hostname.toLowerCase();
-
-    // Cherche si ce domaine est dans la liste
     const targetUrl = redirects[host];
 
     if (targetUrl) {
-      // Redirection immédiate en conservant le chemin (ex. /page1)
-      window.location.href = targetUrl + window.location.pathname + window.location.search;
+        // Redirection immédiate et silencieuse
+        window.location.replace(targetUrl + window.location.pathname + window.location.search);
     } else {
-      // Si le domaine n'est pas reconnu (ex. accès direct au site GitHub)
-      document.body.innerHTML = `
-        <h1>Gestionnaire de redirections EPC</h1>
-        <p>Ce site sert à rediriger les sous-domaines vers les sites des partenaires.</p>
-        <p>Le domaine <strong>${host}</strong> n'est pas configuré.</p>
-        <p>Contactez l'administrateur pour ajouter une nouvelle redirection.</p>
-      `;
+        // PAGE D'ADMINISTRATION (s'affiche si accès direct au repo GitHub)
+        document.body.innerHTML = `
+            <h1>🚀 Portail d'Administration des Redirections</h1>
+            <p>Ce service gère actuellement <strong>${Object.keys(redirects).length}</strong> sous-domaines.</p>
+            
+            <div class="admin">
+                <h2>📝 Guide d'Ajout Rapide</h2>
+                <p>Pour ajouter un partenaire, ajoute simplement une ligne dans l'objet <code>redirects</code> :</p>
+                <code style="display:block; white-space:pre; margin:15px 0;">"nouveau-partenaire.epc.cm": "https://url-exacte.com",</code>
+                <p>Puis <strong>commit et push</strong> sur GitHub. La redirection sera active en ~1 minute.</p>
+                
+                <h3>📊 Redirections Actuellement Configurées</h3>
+                <table>
+                    <tr><th>Sous-domaine</th><th>Redirige vers</th></tr>
+                    ${Object.entries(redirects).map(([key, value]) => `<tr><td><code>${key}</code></td><td><a href="${value}" target="_blank">${value}</a></td></tr>`).join('')}
+                </table>
+                
+                <p><strong>Prochain ID disponible :</strong> partenaire${Object.keys(redirects).length + 1}.epc.cm</p>
+            </div>
+            
+            <p><em>Propulsé par GitHub Pages • <a href="https://github.com/ton-utilisateur/ton-repo" target="_blank">Accéder au repository</a></em></p>
+        `;
     }
-  </script>
+</script>
+
+<noscript>
+    <h2>JavaScript est requis pour ce système de redirection.</h2>
+</noscript>
+
 </body>
 </html>
